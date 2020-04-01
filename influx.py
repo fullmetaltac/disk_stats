@@ -10,8 +10,6 @@ from time import sleep
 
 from influxdb import InfluxDBClient
 
-disk = 'disk1s1'
-
 
 def shell(cmd: str):
     process = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
