@@ -1,7 +1,7 @@
 {
     "name": "InfluxDB",
     "type": "influxdb",
-    "url": "http://192.168.132.113:9086",
+    "url": "http://localhost:9086",
     "database": "temp_db",
     "access": "proxy",
     "basicAuth": true,
