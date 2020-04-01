@@ -2,6 +2,7 @@
 
 if [ "$1" == "" ]; then
     echo "Requires disk parameter for testing [ e.g ./run.sh disk1s3]"
+    exit 1
 fi
 
 docker-compose up -d
