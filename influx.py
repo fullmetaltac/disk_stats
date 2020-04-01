@@ -43,7 +43,7 @@ def fio(disk: str):
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
-        print('Should specify disk to test')
+        print('"Requires disk parameter')
         exit()
     disk = sys.argv[1]
     fio_process = Process(target=fio, args=(disk,))

@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [ "$1" == "" ]; then
+    echo "Requires disk parameter for testing [ e.g ./run.sh disk1s3]"
+fi
+
 docker-compose up -d
 
 while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:4000)" != "302" ]]; do echo 'Waiting grafana...'; sleep 1; done
@@ -15,4 +19,4 @@ curl -XPOST -u admin:admin  http://localhost:4000/api/datasources -H "content-ty
 echo
 curl -XPOST -u admin:admin  http://localhost:4000/api/dashboards/db -H "content-type: application/json"  -d @./dashboard.json
 
-python3 influx.py $0
+python3 influx.py $1
