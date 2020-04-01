@@ -1,0 +1,29 @@
+version: "3.7"
+
+volumes:
+  influx-data:
+  grafana-data:
+
+services:
+  influxdb:
+    image: influxdb:latest
+    container_name: influxdb
+    ports:
+      - "9083:8083"
+      - "9086:8086"
+      - "9090:8090"
+    env_file:
+      - 'env.influxdb'
+    volumes:
+      - influx-data:/var/lib/influxdb
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    user : "0"
+    ports:
+      - "4000:3000"
+    links:
+      - influxdb
+    volumes:
+      - grafana-data:/var/lib/grafana
