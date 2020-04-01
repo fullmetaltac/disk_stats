@@ -37,7 +37,7 @@ def log_temp(disk: str):
     sleep(1)
 
 
-def fio():
+def fio(disk: str):
     shell(f"fio --name=random-write --ioengine=posixaio --rw=randwrite --bs=1m --size=1g --numjobs=1 --iodepth=1 --runtime=60 --time_based --end_fsync=1 > /dev/null 2>&1")
 
 
