@@ -2,6 +2,7 @@ import datetime
 import os
 import platform
 import subprocess
+import sys
 from datetime import datetime
 from multiprocessing import Process
 from os import popen
@@ -22,7 +23,7 @@ client = InfluxDBClient(host='localhost', port=9086)
 client.switch_database('temp_db')
 
 
-def log_temp():
+def log_temp(disk: str):
     json_body = [
         {
             "measurement": "disk_temp",
@@ -39,13 +40,16 @@ def log_temp():
 
 
 def fio():
-    shell(
-        f"fio --name=random-write --ioengine=posixaio --rw=randwrite --bs=1m --size=1g --numjobs=1 --iodepth=1 --runtime=60 --time_based --end_fsync=1 > /dev/null 2>&1")
+    shell(f"fio --name=random-write --ioengine=posixaio --rw=randwrite --bs=1m --size=1g --numjobs=1 --iodepth=1 --runtime=60 --time_based --end_fsync=1 > /dev/null 2>&1")
 
 
 if __name__ == '__main__':
-    fio_process = Process(target=fio)
+    if len(sys.argv) < 2:
+        print('Should specify disk to test')
+        exit()
+    disk = sys.argv[1]
+    fio_process = Process(target=fio, args=(disk,))
     fio_process.start()
 
     while fio_process.is_alive():
-        log_temp()
+        log_temp(disk)
