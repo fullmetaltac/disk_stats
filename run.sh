@@ -14,7 +14,6 @@ echo
 curl -XPOST 'http://localhost:9086/query' --data-urlencode 'q=CREATE DATABASE temp_db'
 
 echo
-
 curl -XPOST -u admin:admin  http://localhost:4000/api/datasources -H "content-type: application/json"  -d @./datasource.json
 
 echo
