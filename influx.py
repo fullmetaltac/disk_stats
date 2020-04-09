@@ -1,11 +1,9 @@
 import datetime
-import os
-import platform
+import json
 import subprocess
 import sys
 from datetime import datetime
 from multiprocessing import Process
-from os import popen
 from time import sleep
 
 from influxdb import InfluxDBClient
@@ -32,6 +30,25 @@ def log_temp(disk: str):
         }
     ]
 
+    # print(json_body)
+    client.write_points(json_body)
+    sleep(1)
+
+
+def log_iops(disk: str):
+    load = json.loads(shell(f"ioping -c 1 -j ."))[-1]["load"]
+
+    json_body = [
+        {
+            "measurement": "disk_iops",
+            "time": datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ'),
+            "fields": {
+                "bps": load["bps"],
+                "iops": load["iops"]
+            }
+        }
+    ]
+
     print(json_body)
     client.write_points(json_body)
     sleep(1)
@@ -51,3 +68,4 @@ if __name__ == '__main__':
 
     while fio_process.is_alive():
         log_temp(disk)
+        log_iops(disk)
