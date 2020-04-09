@@ -14,9 +14,6 @@
       ]
     },
     "editable": true,
-    "gnetId": null,
-    "graphTooltip": 0,
-    "links": [],
     "panels": [
       {
         "aliasColors": {},
@@ -378,12 +375,7 @@
       }
     ],
     "refresh": "5s",
-    "schemaVersion": 22,
     "style": "dark",
-    "tags": [],
-    "templating": {
-      "list": []
-    },
     "time": {
       "from": "now-5m",
       "to": "now"
@@ -403,9 +395,6 @@
       ]
     },
     "timezone": "browser",
-    "title": "Sats Dashboard",
-    "variables": {
-      "list": []
-    }
+    "title": "Sats Dashboard"
   }
 }
