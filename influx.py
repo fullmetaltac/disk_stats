@@ -68,3 +68,5 @@ if __name__ == '__main__':
         Process(target=log_temp, args=(disk,)).start()
         Process(target=log_iops, args=(disk,)).start()
         sleep(0.5)
+
+    shell('rm random-write*')
