@@ -67,5 +67,5 @@ if __name__ == '__main__':
     fio_process.start()
 
     while fio_process.is_alive():
-        log_temp(disk)
-        log_iops(disk)
+        Process(target=log_temp, args=(disk,)).start()
+        Process(target=log_iops, args=(disk,)).start()
