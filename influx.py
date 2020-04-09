@@ -53,7 +53,7 @@ def log_iops(disk: str):
 
 
 def fio(disk: str):
-    shell(f"fio --name=random-write --ioengine=posixaio --rw=randwrite --bs=1m --size=1g --numjobs=1 --iodepth=1 --runtime=60 --time_based --end_fsync=1 > /dev/null 2>&1")
+    shell(f"fio --name=random-write --ioengine=posixaio --rw=randwrite --bs=1m --size=1g --numjobs=1 --iodepth=1 --runtime=300 --time_based --end_fsync=1 > /dev/null 2>&1")
 
 
 if __name__ == '__main__':
@@ -67,4 +67,4 @@ if __name__ == '__main__':
     while fio_process.is_alive():
         Process(target=log_temp, args=(disk,)).start()
         Process(target=log_iops, args=(disk,)).start()
-        sleep(1)
+        sleep(0.5)
