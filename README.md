@@ -1,4 +1,3 @@
 Requirements
-1) brew isntall fio
-1) brew install smartmontools
-1) brew install ioping
+1) Make sure that disk target is supports smartctl
+1) Just launch run.sh

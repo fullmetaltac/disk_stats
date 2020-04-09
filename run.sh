@@ -1,5 +1,9 @@
 #!/bin/bash
 
+brew list fio || brew install fio
+brew list ioping || brew install ioping
+brew list smartmontools || brew install smartmontools
+
 if [ "$1" == "" ]; then
     echo "Requires disk parameter for testing [ e.g ./run.sh disk1s3]"
     exit 1
