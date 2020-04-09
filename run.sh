@@ -15,7 +15,8 @@ while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:4000)" != "302" ]
 while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:9086)" != "404" ]]; do echo 'Waiting influxdb...'; sleep 1; done
 
 # Update localhost to actual ipv4
-IPV4=$(ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}' )
+IPV4=$( ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}' )
+echo $IPV4
 sed  "s/localhost/$IPV4/g" datasource.json
 
 curl -XPOST 'http://localhost:9086/query' --data-urlencode 'q=CREATE DATABASE temp_db'
