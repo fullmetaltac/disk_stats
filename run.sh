@@ -16,11 +16,14 @@ while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:9086)" != "404" ]
 
 echo
 curl -XPOST 'http://localhost:9086/query' --data-urlencode 'q=CREATE DATABASE temp_db'
+echo '\n'
 
 echo
 curl -XPOST -u admin:admin  http://localhost:4000/api/datasources -H "content-type: application/json"  -d @./datasource.json
+echo '\n'
 
 echo
 curl -XPOST -u admin:admin  http://localhost:4000/api/dashboards/db -H "content-type: application/json"  -d @./dashboard.json
+echo '\n'
 
 python3 influx.py $1
