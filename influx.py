@@ -30,9 +30,8 @@ def log_temp(disk: str):
         }
     ]
 
-    # print(json_body)
+    print(json_body)
     client.write_points(json_body)
-    sleep(1)
 
 
 def log_iops(disk: str):
@@ -51,7 +50,6 @@ def log_iops(disk: str):
 
     print(json_body)
     client.write_points(json_body)
-    sleep(1)
 
 
 def fio(disk: str):
@@ -69,3 +67,4 @@ if __name__ == '__main__':
     while fio_process.is_alive():
         Process(target=log_temp, args=(disk,)).start()
         Process(target=log_iops, args=(disk,)).start()
+        sleep(1)
