@@ -14,6 +14,8 @@
       ]
     },
     "editable": true,
+    "graphTooltip": 0,
+    "links": [],
     "panels": [
       {
         "aliasColors": {},
@@ -76,6 +78,44 @@
             "query": "SELECT \"temp\" FROM \"disk_temp\"",
             "rawQuery": true,
             "refId": "A",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "value"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "mean"
+                }
+              ]
+            ],
+            "tags": []
+          },
+          {
+            "alias": "",
+            "groupBy": [
+              {
+                "params": [
+                  "$__interval"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "orderByTime": "ASC",
+            "policy": "default",
+            "query": "SELECT  moving_average(\"temp\", 30) FROM \"disk_temp\"",
+            "rawQuery": true,
+            "refId": "B",
             "resultFormat": "time_series",
             "select": [
               [
@@ -211,6 +251,43 @@
               ]
             ],
             "tags": []
+          },
+          {
+            "groupBy": [
+              {
+                "params": [
+                  "$__interval"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "orderByTime": "ASC",
+            "policy": "default",
+            "query": "SELECT moving_average(iops, 50) FROM \"disk_iops\"",
+            "rawQuery": true,
+            "refId": "B",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "value"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "mean"
+                }
+              ]
+            ],
+            "tags": []
           }
         ],
         "thresholds": [],
@@ -330,6 +407,43 @@
               ]
             ],
             "tags": []
+          },
+          {
+            "groupBy": [
+              {
+                "params": [
+                  "$__interval"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "orderByTime": "ASC",
+            "policy": "default",
+            "query": "SELECT moving_average(bps, 30) FROM \"disk_iops\"",
+            "rawQuery": true,
+            "refId": "B",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "value"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "mean"
+                }
+              ]
+            ],
+            "tags": []
           }
         ],
         "thresholds": [],
@@ -376,6 +490,10 @@
     ],
     "refresh": "5s",
     "style": "dark",
+    "tags": [],
+    "templating": {
+      "list": []
+    },
     "time": {
       "from": "now-5m",
       "to": "now"
@@ -395,6 +513,9 @@
       ]
     },
     "timezone": "browser",
-    "title": "Sats Dashboard"
+    "title": "Sats Dashboard",
+    "variables": {
+      "list": []
+    },
   }
 }

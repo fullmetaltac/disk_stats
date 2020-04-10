@@ -56,11 +56,17 @@ def fio(disk: str):
     shell(f"fio --name=random-write --ioengine=posixaio --rw=randwrite --bs=1m --size=1g --numjobs=1 --iodepth=1 --runtime=300 --time_based --end_fsync=1 > /dev/null 2>&1")
 
 
+def cleanup():
+    shell('rm random-write*')
+
+
 if __name__ == '__main__':
     if len(sys.argv) < 2:
         print('"Requires disk parameter')
         exit()
     disk = sys.argv[1]
+    cleanup()
+
     fio_process = Process(target=fio, args=(disk,))
     fio_process.start()
 
@@ -69,4 +75,4 @@ if __name__ == '__main__':
         Process(target=log_iops, args=(disk,)).start()
         sleep(0.5)
 
-    shell('rm random-write*')
+    cleanup()
